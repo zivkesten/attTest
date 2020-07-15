@@ -1,6 +1,5 @@
 package com.zk.atttest.viewModel
 
-import android.util.Log
 import androidx.lifecycle.*
 import com.zk.atttest.model.Event
 import com.zk.atttest.model.Item
@@ -12,6 +11,8 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 class MainViewModel(private val repository: Repository) : ViewModel() {
+
+	private val NUMBER_OF_ITEMS_IN_PAGE = 10
 
 	private val viewState = MutableLiveData<ListViewState>()
 
@@ -29,7 +30,7 @@ class MainViewModel(private val repository: Repository) : ViewModel() {
 
 	fun event(event: Event) {
 		when(event) {
-			is Event.ScreenLoad, Event.SwipeToRefreshEvent -> getUsersFromApi(10)
+			is Event.ScreenLoad, Event.SwipeToRefreshEvent -> getUsersFromApi(NUMBER_OF_ITEMS_IN_PAGE)
 			is Event.ListItemClicked -> viewAction.postValue(ViewEffect.TransitionToScreen(event.item))
 		}
 	}
