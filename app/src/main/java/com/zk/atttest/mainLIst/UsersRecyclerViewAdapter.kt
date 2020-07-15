@@ -14,13 +14,13 @@ class UsersRecyclerViewAdapter(private var values: List<Item> = ArrayList(),
                                private val listener: OnItemClickListener)
     : RecyclerView.Adapter<UsersRecyclerViewAdapter.ViewHolder>() {
 
-    fun update(articles: List<Item>) {
+    fun update(items: List<Item>) {
         if (values.isEmpty()) {
-            values = articles
+            values = items
             notifyDataSetChanged()
             return
         }
-        val diffResult = DiffUtil.calculateDiff(UsersListDiffUtil(values, articles))
+        val diffResult = DiffUtil.calculateDiff(UsersListDiffUtil(values, items))
         diffResult.dispatchUpdatesTo(this)
     }
 

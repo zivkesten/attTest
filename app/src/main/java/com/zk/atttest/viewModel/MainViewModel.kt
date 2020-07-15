@@ -1,14 +1,12 @@
 package com.zk.atttest.viewModel
 
+import android.util.Log
 import androidx.lifecycle.*
-import com.zk.atttest.model.Event
-import com.zk.atttest.model.Item
-import com.zk.atttest.model.ListViewState
-import com.zk.atttest.model.ViewEffect
+import com.zk.atttest.model.*
 import com.zk.atttest.repository.Repository
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 class MainViewModel(private val repository: Repository) : ViewModel() {
 
@@ -25,7 +23,7 @@ class MainViewModel(private val repository: Repository) : ViewModel() {
 	private var currentViewState = ListViewState()
 		set(value) {
 			field = value
-			viewState.value = value
+			viewState.postValue(value)
 		}
 
 	fun event(event: Event) {
@@ -36,18 +34,24 @@ class MainViewModel(private val repository: Repository) : ViewModel() {
 	}
 
 	private fun getUsersFromApi(numOfUsers: Int) {
-		viewModelScope.launch {
-			val mutableList = ArrayList<Item>()
-			repeat(numOfUsers) {
-				val usersResult = loadUsersFromApi()
-				usersResult?.results?.first()?.let { it1 -> mutableList.add(it1) }
+		try {
+			viewModelScope.launch(Dispatchers.IO) {
+				val usersFromApi = mutableListOf<UsersResponse?>()
+				repeat(numOfUsers) {
+					//Wait and execute together async
+					val usersFromApiDeferred = async { repository.getUsers() }
+					val userFromApi = usersFromApiDeferred.await()
+					usersFromApi.add(userFromApi)
+				}
+				val mutableList = usersFromApi.map {
+					(it ?: UsersResponse(errorMessage = "Error response"))
+						.results
+						.first()
+				}
+				currentViewState = currentViewState.copy(adapterList = mutableList)
 			}
-			currentViewState = currentViewState.copy(adapterList = mutableList)
+		} catch (e: Exception) {
+			Log.e(MainViewModel::class.java.simpleName, "Error loading users ${e.localizedMessage}")
 		}
 	}
-
-	private suspend fun loadUsersFromApi() =
-		withContext(Dispatchers.IO) {
-			repository.getUsers()
-		}
 }
