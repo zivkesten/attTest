@@ -22,6 +22,27 @@ class Item (
     var picture: Picture? = null
 ): Parcelable
 
+fun Item.address(): String{
+    val addressBuilder = StringBuilder()
+    //Build the address
+    addressBuilder.append(location?.street?.number)
+        .append(" ")
+        .append(location?.street?.name)
+        .append(", ")
+        .append(location?.city)
+        .append(", ")
+        .append(location?.country)
+    return addressBuilder.toString()
+}
+
+fun Item.name(): String {
+    val nameBuilder = StringBuilder()
+    nameBuilder.append(name?.first)
+        .append(" ")
+        .append(name?.last)
+    return nameBuilder.toString()
+}
+
 @Parcelize
 data class Name (
     @SerializedName("title")

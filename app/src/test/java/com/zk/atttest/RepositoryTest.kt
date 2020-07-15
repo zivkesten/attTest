@@ -34,7 +34,7 @@ class RepositoryTest {
     }
 
     @Test
-    fun `test getNews then articles is returned`() {
+    fun `test getUsers then users is returned`() {
         runBlocking {
             assertEquals(users, repository.getUsers())
         }
