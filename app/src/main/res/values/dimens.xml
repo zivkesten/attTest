@@ -17,4 +17,12 @@
     -->
     <dimen name="inner_frame_layout_padding">5dp</dimen>
     <dimen name="cadr_text_margin">16dp</dimen>
+    <dimen name="title_text_size">30sp</dimen>
+    <dimen name="title_padding">16dp</dimen>
+    <dimen name="card_height">232dp</dimen>
+    <dimen name="email_text_size">20sp</dimen>
+    <dimen name="address_margin_end">7dp</dimen>
+    <dimen name="card_margins">8dp</dimen>
+    <dimen name="card_corner_radius">10dp</dimen>
+    <dimen name="card_elevation">10dp</dimen>
 </resources>

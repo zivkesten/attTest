@@ -16,10 +16,10 @@
             app:layout_constraintStart_toStartOf="@+id/title"
             tools:context=".views.detail.UserFragment">
 
-            <ImageView
+            <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/backdrop"
                 android:layout_width="0dp"
-                android:layout_height="232dp"
+                android:layout_height="@dimen/card_height"
                 android:scaleType="centerCrop"
                 app:layout_constraintBottom_toTopOf="@+id/title"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -30,8 +30,8 @@
                 android:id="@+id/title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="16dp"
-                android:textSize="30sp"
+                android:padding="@dimen/title_padding"
+                android:textSize="@dimen/title_text_size"
                 app:layout_constraintBottom_toTopOf="@+id/email"
                 app:layout_constraintEnd_toEndOf="@+id/backdrop"
                 app:layout_constraintStart_toStartOf="@+id/backdrop"
@@ -41,8 +41,8 @@
                 android:id="@+id/email"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="16dp"
-                android:textSize="20sp"
+                android:padding="@dimen/title_padding"
+                android:textSize="@dimen/email_text_size"
                 app:layout_constraintBottom_toTopOf="@+id/address"
                 app:layout_constraintEnd_toEndOf="@+id/title"
                 app:layout_constraintStart_toStartOf="@+id/title"
@@ -52,9 +52,7 @@
                 android:id="@+id/address"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="7dp"
-                android:text="go to"
-                app:layout_constraintBottom_toTopOf="@+id/textView"
+                android:layout_marginEnd="@dimen/address_margin_end"
                 app:layout_constraintEnd_toEndOf="@+id/email"
                 app:layout_constraintStart_toStartOf="@+id/email"
                 app:layout_constraintTop_toBottomOf="@+id/email" />
@@ -63,7 +61,6 @@
                 android:id="@+id/phone"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="TextView"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@+id/address"
                 app:layout_constraintStart_toStartOf="@+id/address"

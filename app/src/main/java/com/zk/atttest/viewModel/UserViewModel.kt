@@ -11,11 +11,7 @@ class UserViewModel : ViewModel() {
 
     private val viewState = MutableLiveData<DetailViewState>()
 
-    private val viewAction = MutableLiveData<ViewEffect>()
-
     val obtainStateDetail: LiveData<DetailViewState> = viewState
-
-    val obtainAction: LiveData<ViewEffect> = viewAction
 
     private var currentViewState = DetailViewState()
         set(value) {
