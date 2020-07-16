@@ -1,6 +1,7 @@
 package com.zk.atttest.views.list
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -70,6 +71,9 @@ class UserListFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener, OnIte
 
 	private fun render(state: ListViewState) {
 		state.adapterList.let { usersAdapter.update(it) }
+		binding.loadingProgressBar.visibility = state.loadingStateVisibility ?: View.GONE
+		binding.errorMessage.visibility = state.errorMessageVisibility ?: View.GONE
+		state.errorMessage.let { binding.errorMessage.text = it }
 		swiperefresh.isRefreshing = false
 	}
 

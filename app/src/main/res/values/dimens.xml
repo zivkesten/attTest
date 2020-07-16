@@ -25,4 +25,5 @@
     <dimen name="card_margins">8dp</dimen>
     <dimen name="card_corner_radius">10dp</dimen>
     <dimen name="card_elevation">10dp</dimen>
+    <dimen name="error_message_size">30sp</dimen>
 </resources>

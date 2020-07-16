@@ -19,7 +19,9 @@ class Item (
     @SerializedName("cell")
     var cell: String? = null,
     @SerializedName("picture")
-    var picture: Picture? = null
+    var picture: Picture? = null,
+    @SerializedName("errorMessage")
+    var errorMessage: String? = null
 ): Parcelable
 
 fun Item.address(): String{
